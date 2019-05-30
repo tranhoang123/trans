@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.TextView
+import com.example.translate.ROOM.Word
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
@@ -34,6 +35,23 @@ class MainActivity : AppCompatActivity() {
                 tvVietnamese.text = "VIETNAMESE"
             }
         }
+
+        save.setOnClickListener{
+            val intent = Intent(this@MainActivity, SaveActivity::class.java)
+
+            if(edEnglish.text.toString() != "" && edVietnam.text.toString() != "")
+            {
+                val word = Word(null, edEnglish.text.toString(),edVietnam.text.toString())
+                intent.putExtra(WORD_KEY, word)
+            }
+            else
+            {
+                val word= Word()
+                intent.putExtra(WORD_KEY, word)
+            }
+            startActivity(intent)
+        }
+
         btTranslate.setOnClickListener{
             if(tvEnglish.text == "ENGLISH"){
                 Log.i("Test: ", "Hello")

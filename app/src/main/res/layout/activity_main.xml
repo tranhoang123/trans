@@ -12,7 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp" android:layout_marginTop="5dp"
 
-            android:background="@drawable/background"
+            android:background="@drawable/backgroung1"
             android:layout_marginLeft="7dp" android:layout_marginRight="7dp">
 
         <TextView
