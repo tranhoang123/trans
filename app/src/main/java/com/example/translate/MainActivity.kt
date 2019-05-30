@@ -41,8 +41,17 @@ class MainActivity : AppCompatActivity() {
 
             if(edEnglish.text.toString() != "" && edVietnam.text.toString() != "")
             {
-                val word = Word(null, edEnglish.text.toString(),edVietnam.text.toString())
-                intent.putExtra(WORD_KEY, word)
+                // Detect language
+                if(English.text == "English")
+                {
+                    val word = Word(null, edEnglish.text.toString(),edVietnam.text.toString(), true)
+                    intent.putExtra(WORD_KEY, word)
+                }
+                else
+                {
+                    val word = Word(null, edEnglish.text.toString(),edVietnam.text.toString(), false)
+                    intent.putExtra(WORD_KEY, word)
+                }
             }
             else
             {

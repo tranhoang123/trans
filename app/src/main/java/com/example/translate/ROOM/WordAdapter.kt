@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.translate.R
 import kotlinx.android.synthetic.main.word_item.view.*
 import java.util.*
@@ -31,6 +32,15 @@ class WordAdapter(var items: ArrayList<Word>, val context: Context) : RecyclerVi
     override fun onBindViewHolder(p0: WordViewHolder, p1: Int) {
         p0.tvEnglish.text = items[p1].english
         p0.tvVietnamese.text = items[p1].vietnamese
+
+        if(!items[p1].language) // Vietnamese language
+        {
+            p0.tvEn.text = "Vietnamses"
+            p0.tvVn.text = "English"
+
+            p0.tvEn.setBackgroundResource(R.drawable.background)
+            p0.tvVn.setBackgroundResource(R.drawable.background2)
+        }
 
 
         p0.btnRemove.setOnClickListener{
@@ -78,4 +88,6 @@ class WordViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     var tvEnglish = view.tvEnglish
     var tvVietnamese = view.tvVietnamese
     var btnRemove = view.btnRemove
+    var tvEn = view.tvEn
+    var tvVn = view.tvVn
 }
