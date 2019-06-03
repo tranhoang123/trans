@@ -1,11 +1,15 @@
 package com.example.translate
 
+import android.arch.persistence.room.Room
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.widget.Toast
+import com.example.translate.ROOM.AppDatabase
 import com.example.translate.ROOM.Word
+import com.example.translate.ROOM.WordDAO
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
@@ -14,10 +18,23 @@ import org.json.JSONObject
 import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
+
+    var words: ArrayList<Word> = ArrayList()
+    lateinit var dao: WordDAO
+    var word = Word()
+    lateinit var db: AppDatabase
+
     private lateinit var mHandler: Handler
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Init Room
+        initRoomDatabase()
+
+        // Get all data from Room
+        getWords()
+
         mHandler = Handler()
         translate.setOnClickListener{
             if(English.text == "English"){
@@ -32,6 +49,27 @@ class MainActivity : AppCompatActivity() {
                 tvVietnamese.text = "VIETNAMESE"
             }
         }
+        Save.setOnClickListener {
+            if(edEnglish.text.toString() != "" && edVietnam.text.toString() != "")
+            {
+                // Get translation result
+                word = Word(null, edEnglish.text.toString(),edVietnam.text.toString())
+
+                // Default value
+                val temp = Word()
+
+                // Word is not exist & different with default value
+                if((word != temp) && (wordAvailable(word) == false))
+                {
+                    dao.insert(word)
+                    Toast.makeText(this@MainActivity, "Saved!", Toast.LENGTH_SHORT).show()
+                }
+                else
+                {
+                    Toast.makeText(this@MainActivity, "This word was available!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
 
         save.setOnClickListener{
             val intent = Intent(this@MainActivity, SaveActivity::class.java)
@@ -41,12 +79,12 @@ class MainActivity : AppCompatActivity() {
                 // Detect language
                 if(English.text == "English")
                 {
-                    val word = Word(null, edEnglish.text.toString(),edVietnam.text.toString(), true)
+                    val word = Word(null, edEnglish.text.toString(),edVietnam.text.toString())
                     intent.putExtra(WORD_KEY, word)
                 }
                 else
                 {
-                    val word = Word(null, edEnglish.text.toString(),edVietnam.text.toString(), false)
+                    val word = Word(null, edEnglish.text.toString(),edVietnam.text.toString())
                     intent.putExtra(WORD_KEY, word)
                 }
             }
@@ -70,6 +108,42 @@ class MainActivity : AppCompatActivity() {
         }
         camera.setOnClickListener{ goToCamera() }
 
+    }
+    private fun wordAvailable(word: Word): Boolean {
+        getWords()
+        val size = words.size
+
+        // Check item available
+        if (size == 0)
+        {
+            return false
+        }
+
+        for (i in 0 until size)
+        {
+            if(words[i].vietnamese == word.vietnamese && words[i].english == word.english)
+            {
+                return true
+            }
+        }
+
+        // List does not contain item
+        return false
+    }
+
+    private fun initRoomDatabase() {
+        val db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, DATABASE_NAME
+        ).allowMainThreadQueries().build()
+
+        dao = db.wordDAO()
+    }
+
+    private fun getWords() {
+        this.words.clear()
+        val words = dao.getAll()
+        this.words.addAll(words)
     }
     private fun goToCamera(){
         val intent = Intent(this, CamActivity::class.java)

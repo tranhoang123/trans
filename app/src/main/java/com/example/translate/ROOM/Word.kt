@@ -12,8 +12,7 @@ data class Word(
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null,
     var english: String,
-    var vietnamese: String,
-    var language: Boolean // true = EN, false = VN
+    var vietnamese: String
 ): Parcelable {
-    constructor(): this(null, "","", true)
+    constructor(): this(null, "","")
 }

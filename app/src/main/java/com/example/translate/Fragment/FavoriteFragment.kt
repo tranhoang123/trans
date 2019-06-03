@@ -64,17 +64,6 @@ class FavoriteFragment: Fragment()  {
     {
         var words = dao.getAll()
         this.words.addAll(words)
-
-        word = getActivity()!!.getIntent().getExtras().getParcelable(WORD_KEY) as Word
-
-        val temp = Word()
-
-        if(word != temp && wordAdapter.availableItem(word))
-        {
-            wordAdapter.appenData(word)
-            dao.insert(word)
-        }
-
         wordAdapter.notifyDataSetChanged()
 
     }
