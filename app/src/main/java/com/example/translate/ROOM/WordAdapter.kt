@@ -77,4 +77,6 @@ class WordViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     var tvEnglish = view.tvEnglish
     var tvVietnamese = view.tvVietnamese
     var btnRemove = view.btnRemove
+    var tvEn = view.tvEn
+    var tvVn = view.tvVn
 }

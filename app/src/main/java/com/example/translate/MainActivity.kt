@@ -53,7 +53,15 @@ class MainActivity : AppCompatActivity() {
             if(edEnglish.text.toString() != "" && edVietnam.text.toString() != "")
             {
                 // Get translation result
-                word = Word(null, edEnglish.text.toString(),edVietnam.text.toString())
+                if(English.text == "English")
+                {
+                    word = Word(null, edEnglish.text.toString(),edVietnam.text.toString(), true)
+                }
+                else
+                {
+                    word = Word(null, edEnglish.text.toString(),edVietnam.text.toString(), false)
+                }
+
 
                 // Default value
                 val temp = Word()
@@ -79,12 +87,12 @@ class MainActivity : AppCompatActivity() {
                 // Detect language
                 if(English.text == "English")
                 {
-                    val word = Word(null, edEnglish.text.toString(),edVietnam.text.toString())
+                    val word = Word(null, edEnglish.text.toString(),edVietnam.text.toString(), true)
                     intent.putExtra(WORD_KEY, word)
                 }
                 else
                 {
-                    val word = Word(null, edEnglish.text.toString(),edVietnam.text.toString())
+                    val word = Word(null, edEnglish.text.toString(),edVietnam.text.toString(), false)
                     intent.putExtra(WORD_KEY, word)
                 }
             }
