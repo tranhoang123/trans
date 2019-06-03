@@ -14,8 +14,63 @@
     <android.support.v4.view.ViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:color/white"/>
+
+    <LinearLayout
+            android:background="@drawable/backgroung1"
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+        <LinearLayout
+                android:background="@drawable/background2"
+                android:layout_marginTop="10dp"
+
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+                    android:text="Language filter:"
+                    android:textSize="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            <RadioGroup
+                    android:background="#fff"
+                    android:id="@+id/rdGroup"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <RadioButton
+                        android:id="@+id/rdEnglish"
+                        android:text="English"
+                        android:clickable="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <RadioButton
+                        android:id="@+id/rdVietnamese"
+                        android:text="Vietnamese"
+                        android:clickable="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <RadioButton
+                        android:id="@+id/rdAll"
+                        android:text="All"
+                        android:clickable="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 
 </LinearLayout>

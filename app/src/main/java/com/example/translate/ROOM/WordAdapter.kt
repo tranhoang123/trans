@@ -32,6 +32,15 @@ class WordAdapter(var items: ArrayList<Word>, val context: Context) : RecyclerVi
         p0.tvEnglish.text = items[p1].english
         p0.tvVietnamese.text = items[p1].vietnamese
 
+        if(!items[p1].language) // Vietnamese language
+        {
+            p0.tvEn.text = "Vietnamses"
+            p0.tvVn.text = "English"
+
+            p0.tvEn.setBackgroundResource(R.drawable.background)
+            p0.tvVn.setBackgroundResource(R.drawable.background2)
+        }
+
         p0.btnRemove.setOnClickListener{
             mListener.onTrashIconClicked(p1)
         }

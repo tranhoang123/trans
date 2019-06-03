@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioGroup
 import com.example.translate.*
 import com.example.translate.ROOM.*
 import kotlinx.android.synthetic.main.fragment_favorite.*
@@ -76,6 +77,4 @@ class FavoriteFragment: Fragment()  {
             wordAdapter.notifyDataSetChanged()
         }
     }
-
-
 }
