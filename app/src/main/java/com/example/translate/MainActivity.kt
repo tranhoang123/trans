@@ -4,12 +4,9 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
 import android.util.Log
-import android.widget.TextView
 import com.example.translate.ROOM.Word
 import com.google.gson.Gson
-import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.*

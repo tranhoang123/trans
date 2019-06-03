@@ -13,7 +13,6 @@ import com.example.translate.*
 import com.example.translate.ROOM.*
 import kotlinx.android.synthetic.main.fragment_favorite.*
 import java.util.*
-//import android.R
 
 
 
